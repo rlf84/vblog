@@ -424,7 +424,11 @@ class RevSliderBaseAdmin extends RevSliderBase {
 		
 		$options = apply_filters('revslider_mod_activation_option', $options);
 		
+		
 		$operations = new RevSliderOperations();
+		$options_exist = $operations->getGeneralSettingsValues();
+		$options = array_merge($options_exist, $options);
+		
 		$operations->updateGeneralSettings($options);
 		
 	}

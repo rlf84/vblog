@@ -1,11 +1,11 @@
 /********************************************
  * REVOLUTION 5.0 EXTENSION - CAROUSEL
- * @version: 1.0.2 (01.10.2015)
+ * @version: 1.1 (12.10.2015)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution;
 
 	///////////////////////////////////////////
@@ -298,7 +298,7 @@ var animateCarousel = function(opt,direction,nsae) {
 			_R.organiseCarousel(opt,direction,false,true);	
 			var li = jQuery(opt.li[_.focused]);	
 			opt.c.find('.next-revslide').removeClass("next-revslide");
-			if (nsae) _R.callingNewSlide(opt,opt.c,li.data('index'));
+			if (nsae) _R.callingNewSlide(opt.c,li.data('index'));
 		}, ease:punchgs.Expo.easeOut});	
 }
 

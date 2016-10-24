@@ -1,11 +1,11 @@
 /********************************************
  * REVOLUTION 5.2 EXTENSION - NAVIGATION
- * @version: 1.2.4 (10.03.2016)
+ * @version: 1.3.1 (19.10.2016)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution,
 	_ISM = _R.is_mobile();
 
@@ -224,10 +224,11 @@ jQuery.extend(true,_R, {
 			
 			if (_a.enable === true) {
 				var inst = _a.tmp;
-
-				jQuery.each(opt.thumbs[pi].params,function(i,obj) {
-					inst = inst.replace(obj.from,obj.to);
-				});	
+				if (opt.thumbs[pi]!=undefined) {
+					jQuery.each(opt.thumbs[pi].params,function(i,obj) {
+						inst = inst.replace(obj.from,obj.to);
+					});	
+				}
 				_a.left.j.html(inst);
 				inst = _a.tmp;
 				if (ni>opt.slideamount) return;
@@ -428,12 +429,12 @@ var initKeyboard = function(container,opt) {
 		if ((opt.navigation.keyboard_direction=="horizontal" && e.keyCode == 39) || (opt.navigation.keyboard_direction=="vertical" && e.keyCode==40)) {
 			opt.sc_indicator="arrow";
 			opt.sc_indicator_dir = 0;
-			_R.callingNewSlide(opt,container,1);					
+			_R.callingNewSlide(container,1);					
 		}
 		if ((opt.navigation.keyboard_direction=="horizontal" && e.keyCode == 37) || (opt.navigation.keyboard_direction=="vertical" && e.keyCode==38)) {
 			opt.sc_indicator="arrow";
 			opt.sc_indicator_dir = 1;
-			_R.callingNewSlide(opt,container,-1);									
+			_R.callingNewSlide(container,-1);									
 		}
 	});		
 };
@@ -462,6 +463,8 @@ var initMouseScroll = function(container,opt) {
 				ret = true;
 			if (opt.navigation.mouseScrollNavigation=="carousel") 
 				fs = ls = false;								
+		
+
 		if (psi==-1) {				
 
 			if(res.pixelY<bl) {
@@ -469,16 +472,16 @@ var initMouseScroll = function(container,opt) {
 				if (!fs) {					
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse!=="reverse") {
-						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,container,-1);	
+						opt.sc_indicator_dir = 1;
+						_R.callingNewSlide(container,-1);	
 					} 
 					ret = false;
 				}
 				if (!ls) {
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse==="reverse") {
-						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,container,1);	
+						opt.sc_indicator_dir = 0;
+						_R.callingNewSlide(container,1);	
 					}					
 					ret = false;			 
 				}
@@ -488,16 +491,16 @@ var initMouseScroll = function(container,opt) {
 			 	if (!ls) {			 					 		
 				 	opt.sc_indicator="arrow";
 				 	if (opt.navigation.mouseScrollReverse!=="reverse") {
-						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,container,1);	
+						opt.sc_indicator_dir = 0;
+						_R.callingNewSlide(container,1);	
 					} 				
 					ret = false;
 				}
 				if (!fs) {
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse==="reverse") {
-						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,container,-1);	
+						opt.sc_indicator_dir = 1;
+						_R.callingNewSlide(container,-1);	
 					}		
 					ret = false;
 				}
@@ -539,7 +542,7 @@ var isme = function (a,c,e) {
 // 	-	SET THE SWIPE FUNCTION //	
 var swipeAction = function(container,opt,vertical) {	
 		
-	container.data('opt',opt);
+	//container[0].opt = opt;
 
 	// TOUCH ENABLED SCROLL
 	var _ = opt.carousel;
@@ -723,12 +726,12 @@ var swipeAction = function(container,opt,vertical) {
 					
 					if ((swipe_wait_dir=="horizontal" && direction == "left") || (swipe_wait_dir=="vertical" && direction == "up")) {
 						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,opt.c,1);
+						_R.callingNewSlide(opt.c,1);
 						return false;
 					}
 					if ((swipe_wait_dir=="horizontal" && direction == "right") || (swipe_wait_dir=="vertical" && direction == "down")) {
 						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,opt.c,-1);	
+						_R.callingNewSlide(opt.c,-1);	
 						return false;
 					}
 

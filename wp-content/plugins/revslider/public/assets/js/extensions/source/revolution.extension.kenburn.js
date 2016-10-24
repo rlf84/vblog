@@ -1,12 +1,12 @@
 /********************************************
  * REVOLUTION 5.0 EXTENSION - KEN BURN
- * @version: 1.0.0 (03.08.2015)
+ * @version: 1.1 (12.10.2016)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution;
 
 ///////////////////////////////////////////
@@ -81,7 +81,7 @@ jQuery.extend(true,_R, {
 			kcalcL = function(cw,ch,d) {				
 				var f=d.scalestart/100,
 					fe=d.scaleend/100,
-					ofs = d.oofsetstart != undefined ? d.offsetstart.split(" ") || [0,0] : [0,0],
+					ofs = d.offsetstart != undefined ? d.offsetstart.split(" ") || [0,0] : [0,0],
 					ofe = d.offsetend != undefined ? d.offsetend.split(" ") || [0,0] : [0,0];
 				d.bgposition = d.bgposition == "center center" ? "50% 50%" : d.bgposition;
 				
